@@ -181,7 +181,7 @@ export function Page() {
                 reversed={reverseSortDirection}
                 onSort={() => setSorting('studentsAssigned')}
               >
-                Students Assigned
+                Students Scored
               </Th>
             </Table.Tr>
           </Table.Thead>

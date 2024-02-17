@@ -13,7 +13,18 @@ export const getStudents = asyncHandler(async (req, res) => {
 export const getCourses = asyncHandler(async (req, res) => {
   try {
     const courses = await Course.find({});
-    res.status(200).json({ data: courses });
+    const newCourses = await Promise.all(
+      courses.map(async course => {
+        const res = {
+          courseName: course.courseName,
+          studentsAssigned: await Result.countDocuments({
+            courseName: course._id,
+          }),
+        };
+        return res;
+      }),
+    );
+    res.status(200).json({ data: newCourses });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ message: 'Internal Server Error' });
@@ -34,14 +45,6 @@ export const getResults = asyncHandler(async (req, res) => {
 
       return res;
     });
-    // await Result.populate(results, {
-    //   path: 'student',
-    //   select: 'name',
-    // });
-    // await Result.populate(results, {
-    //   path: 'course',
-    //   select: 'name',
-    // });
     res.status(200).json({ data: newresult });
   } catch (error) {
     console.error('Error:', error);
