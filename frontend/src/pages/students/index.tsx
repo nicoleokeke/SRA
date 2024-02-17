@@ -24,6 +24,7 @@ import { BACKEND_URL } from '../../constant';
 import dayjs from 'dayjs';
 
 interface RowData {
+  _id: string;
   firstName: string;
   familyName: string;
   dateOfBirth: string;
@@ -123,7 +124,7 @@ export function Page() {
   };
 
   const rows = sortedData.map(row => (
-    <Table.Tr key={row.firstName}>
+    <Table.Tr key={row._id}>
       <Table.Td>{row.firstName}</Table.Td>
       <Table.Td>{row.familyName}</Table.Td>
       <Table.Td>{dayjs(row.dateOfBirth).format('DD/MM/YYYY')}</Table.Td>

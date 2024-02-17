@@ -23,6 +23,7 @@ import { useQuery } from '@tanstack/react-query';
 import { BACKEND_URL } from '../../constant';
 
 interface RowData {
+  _id: string;
   courseName: string;
   studentName: string;
   score: string;
@@ -123,7 +124,7 @@ export function Page() {
   };
 
   const rows = sortedData.map(row => (
-    <Table.Tr key={row.courseName}>
+    <Table.Tr key={row._id}>
       <Table.Td>{row.courseName}</Table.Td>
       <Table.Td>{row.studentName}</Table.Td>
       <Table.Td>{row.score}</Table.Td>

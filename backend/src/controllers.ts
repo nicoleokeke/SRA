@@ -16,6 +16,7 @@ export const getCourses = asyncHandler(async (req, res) => {
     const newCourses = await Promise.all(
       courses.map(async course => {
         const res = {
+          _id: course._id,
           courseName: course.courseName,
           studentsAssigned: await Result.countDocuments({
             courseName: course._id,
@@ -38,6 +39,7 @@ export const getResults = asyncHandler(async (req, res) => {
 
     const newresult = results.map((result: any) => {
       const res = {
+        ...result._doc,
         studentName: `${result.studentName.firstName} ${result.studentName.familyName}`,
         courseName: result.courseName.courseName,
         score: result.score,
