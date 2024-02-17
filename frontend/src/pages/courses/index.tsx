@@ -99,7 +99,7 @@ function sortData(
 }
 
 export function Page() {
-  const { data, isLoading } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: ['courses/get'],
     initialData: [],
     queryFn: () =>
@@ -187,7 +187,7 @@ export function Page() {
           </Table.Thead>
 
           <Table.Tbody>
-            {isLoading ? (
+            {isFetching ? (
               <Table.Tr>
                 <Table.Td colSpan={3} align="center">
                   <Loader />
